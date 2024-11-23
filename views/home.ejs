@@ -44,6 +44,7 @@
         }
         form textarea{
             display: block;
+            scrollbar-width: none;
             resize: none;
             width: 20vw;
             height: 4vh;
@@ -52,7 +53,9 @@
             background-color: black;
             color: white;
             font-size: 20px;
+            font-weight: 600;
             border-radius: 10px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             box-shadow: 2px 2px 2px gray;
             padding: 10px;
         }
@@ -61,30 +64,43 @@
         div h3{
             margin-top: 4px;
             font-weight: 600;
+            font-weight: bold;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        span{
+            font-weight: 400;
+            font-family:Verdana, Geneva, Tahoma, sans-serif;
         }
         
     </style>
 </head>
 <body style="background-color: black;">
     <div id="root" style="width: 100%; height: fit-content; padding: 100px 0;">
-        <form method="POST" action="/">
+        <form method="POST" action="/" >
             <textarea name="movie" id="movie" maxlength='24'></textarea>
             <button type="submit">Search</button>
             <% if(locals.data) { %>
-            <div id="result" style="display: flex; padding: 20px; border-radius: 20px; width: 50vw; height: fit-content; background-color: lightblue; margin-top: 30px;">
+            <div id="result" style="box-shadow: 4px 3px 4px black; display: flex; padding: 20px; border-radius: 20px; width: 50vw; height: fit-content; background-color: lightblue; margin-top: 30px;">
                 <img src="<%= data[0].show.image.medium %>" alt="image" style="width: 300px; height: 300px; box-shadow: 2px 2px 4px black; border-radius: 10px; align-self: center;">
                 <div class="content" style="display: flex; flex-direction: column; padding: 20px;">
-                <h3>Name : <%= data[0].show.name %></h3>
-                <h3>Year : <%= data[0].show.premiered %></h3>
-                <h3>Rating : <%= data[0].show.rating.average %></h3>
-                <h3>Runtime : <%= data[0].show.runtime %></h3>
-                <h3>Genre : <%= data[0].show.genres %></h3>
-                <h3>Plot : <%- data[0].show.summary %></h3>
+                <h3>Name : <span><%= data[0].show.name %></span></h3>
+                <h3>Year : <span><%= data[0].show.premiered %></span></h3>
+                <h3>Rating : <span><%= data[0].show.rating.average %></span></h3>
+                <h3>Runtime : <span><%= data[0].show.runtime %> minutes</span></h3>
+                <h3>Genre : <span><%= data[0].show.genres %></span></h3>
+                <h3>Plot : <span><%- data[0].show.summary %></span></h3>
                 </div>
             </div>
             <% } %>
         </form>
     </div>
+
+    <script>
+        document.getElementById("movie").addEventListener("keydown", (e) => {
+            if(e.key === 'Enter'){
+                document.getElementsByTagName('button')[0].click();
+            }
+        })
+    </script>
 </body>
 </html>
