@@ -14,9 +14,15 @@ app.get('/', (req, res) => {
 })
 
 app.post('/', async (req, res) => {
+    try {
     const movie = req.body.movie;
     const result = await axios.get(API_URL + movie);
-    res.render('home.ejs', {data : result.data}, console.log(result.data));   
+    res.render('home.ejs', {data : result.data}, console.log(result.data)); 
+    } catch (error) {
+        res.render('home.ejs', {data: JSON.stringify(error.response.data)});
+        console.log(error.response.data);
+    }
+      
 })
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);

@@ -66,20 +66,22 @@
         
     </style>
 </head>
-<body >
-    <div id="root" style="width: 100%; height: fit-content; background-color: black; padding: 100px 0;">
+<body style="background-color: black;">
+    <div id="root" style="width: 100%; height: fit-content; padding: 100px 0;">
         <form method="POST" action="/">
             <textarea name="movie" id="movie" maxlength='24'></textarea>
             <button type="submit">Search</button>
             <% if(locals.data) { %>
-            <div id="result" style="display: flex; flex-direction: column; padding: 20px; border-radius: 20px; width: 50vw; height: fit-content; background-color: lightblue; margin-top: 30px;">
+            <div id="result" style="display: flex; padding: 20px; border-radius: 20px; width: 50vw; height: fit-content; background-color: lightblue; margin-top: 30px;">
                 <img src="<%= data[0].show.image.medium %>" alt="image" style="width: 300px; height: 300px; box-shadow: 2px 2px 4px black; border-radius: 10px; align-self: center;">
+                <div class="content" style="display: flex; flex-direction: column; padding: 20px;">
                 <h3>Name : <%= data[0].show.name %></h3>
                 <h3>Year : <%= data[0].show.premiered %></h3>
                 <h3>Rating : <%= data[0].show.rating.average %></h3>
                 <h3>Runtime : <%= data[0].show.runtime %></h3>
                 <h3>Genre : <%= data[0].show.genres %></h3>
                 <h3>Plot : <%- data[0].show.summary %></h3>
+                </div>
             </div>
             <% } %>
         </form>
